@@ -1,0 +1,28 @@
+from PIL import Image
+import os
+
+input_folder_path = r'E:\python\Betic\2D to 3D challenge\New folder\14\left'
+output_folder_path_path = r'E:\python\Betic\2D to 3D challenge\New folder\14'
+
+def convert_bmp_to_png(bmp_file, png_file):
+    with Image.open(bmp_file) as img:
+        if img.mode != 'RGBA':
+            img = img.convert('RGBA')
+        img.save(png_file, 'PNG')
+
+def convert_folder_bmp_to_png(input_folder_path, output_folder_path):
+    # Create the output folder if it doesn't exist
+    if not os.path.exists(output_folder_path):
+        os.makedirs(output_folder_path)
+    
+    # Iterate through the BMP files in the input folder
+    for filename in os.listdir(input_folder_path):
+        if filename.endswith('.bmp'):
+            bmp_file = os.path.join(input_folder_path, filename)
+            png_filename = filename.replace('.bmp', '.png')
+            png_file = os.path.join(output_folder_path, png_filename)
+            convert_bmp_to_png(bmp_file, png_file)
+
+# Usage example
+
+convert_folder_bmp_to_png(input_folder_path, output_folder_path_path)
