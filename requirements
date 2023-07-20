@@ -1,0 +1,3 @@
+opencv
+cv2
+OpenGL #make sure Glutinit runs properly
